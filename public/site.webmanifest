@@ -1,0 +1,17 @@
+{
+  "name": "Ghizayat Foods",
+  "short_name": "Ghizayat",
+  "description": "Pure spices, dry fruits and grains — ground in small batches and delivered across Pakistan with cash on delivery.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#fefaf6",
+  "theme_color": "#c81e3c",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

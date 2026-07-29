@@ -1,26 +1,255 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ═══════════════════════════════════════════════════════════════════════════
+   GHIZAYAT FOODS — design tokens
+   Chilli red + royal blue, on a warm paper ground.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@theme {
+  /* ── Chilli red — the primary brand colour ──────────────────────────────*/
+  --color-chilli-50: #fff1f2;
+  --color-chilli-100: #ffe0e3;
+  --color-chilli-200: #ffc5cc;
+  --color-chilli-300: #ff9ba7;
+  --color-chilli-400: #f96174;
+  --color-chilli-500: #e63149;
+  --color-chilli-600: #c81e3c;
+  --color-chilli-700: #a81531;
+  --color-chilli-800: #8a142c;
+  --color-chilli-900: #741529;
+  --color-chilli-950: #400611;
+
+  /* ── Royal blue — the secondary brand colour ────────────────────────────*/
+  --color-royal-50: #eff4ff;
+  --color-royal-100: #dbe5fe;
+  --color-royal-200: #bfd0fe;
+  --color-royal-300: #93b0fd;
+  --color-royal-400: #6088fa;
+  --color-royal-500: #3b63f6;
+  --color-royal-600: #2547eb;
+  --color-royal-700: #1d35d8;
+  --color-royal-800: #1e2faf;
+  --color-royal-900: #1c2c85;
+  --color-royal-950: #141d4f;
+
+  /* ── Warm accents ───────────────────────────────────────────────────────*/
+  --color-saffron-50: #fffbeb;
+  --color-saffron-100: #fef3c7;
+  --color-saffron-300: #fcd34d;
+  --color-saffron-400: #fbbf24;
+  --color-saffron-500: #f59e0b;
+  --color-saffron-600: #d97706;
+
+  --color-leaf-100: #d1fae5;
+  --color-leaf-500: #10b981;
+  --color-leaf-600: #059669;
+  --color-leaf-700: #047857;
+
+  /* ── Neutral ground ─────────────────────────────────────────────────────*/
+  --color-cream-50: #fefaf6;
+  --color-cream-100: #fdf4ec;
+  --color-cream-200: #f7e8da;
+  --color-cream-300: #ecd7c3;
+
+  --color-ink-400: #7c7268;
+  --color-ink-500: #5c5349;
+  --color-ink-600: #443c34;
+  --color-ink-700: #2f2923;
+  --color-ink-800: #1d1916;
+  --color-ink-900: #12100e;
+
+  /* ── Typography ─────────────────────────────────────────────────────────*/
+  --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-playfair), ui-serif, Georgia, serif;
+  /* Urdu renders through locally-installed Nastaliq faces where available.
+     Deliberately not a webfont — Nastaliq files are ~300KB and would cost
+     more in load time than they return. */
+  --font-urdu: "Noto Nastaliq Urdu", "Jameel Noori Nastaleeq", "Alvi Nastaleeq",
+    "Segoe UI", serif;
+
+  /* ── Motion ─────────────────────────────────────────────────────────────*/
+  --animate-marquee: marquee 40s linear infinite;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-shimmer: shimmer 2.4s linear infinite;
+  --animate-pulse-ring: pulse-ring 2.6s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-spin-slow: spin 22s linear infinite;
+
+  /* ── Depth ──────────────────────────────────────────────────────────────*/
+  --shadow-card: 0 1px 2px rgb(29 25 22 / 0.04),
+    0 8px 24px -12px rgb(29 25 22 / 0.12);
+  --shadow-lift: 0 2px 4px rgb(29 25 22 / 0.05),
+    0 20px 44px -16px rgb(200 30 60 / 0.22);
+  --shadow-glow: 0 0 0 1px rgb(255 255 255 / 0.08),
+    0 24px 64px -20px rgb(37 71 235 / 0.5);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-14px) rotate(2deg);
+  }
+}
+
+@keyframes shimmer {
+  from {
+    background-position: 200% 0;
+  }
+  to {
+    background-position: -200% 0;
+  }
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.9);
+    opacity: 0.7;
+  }
+  70% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Base
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    background-color: var(--color-cream-50);
+    color: var(--color-ink-800);
+    font-family: var(--font-sans);
+    /* Stops iOS Safari inflating text in landscape. */
+    -webkit-text-size-adjust: 100%;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background-color: var(--color-chilli-600);
+    color: white;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-royal-600);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  /* Headings default to the display serif. */
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+  }
+}
+
+@layer utilities {
+  .font-urdu {
+    font-family: var(--font-urdu);
+    direction: rtl;
+    unicode-bidi: isolate;
+    line-height: 2;
+  }
+
+  /* Warm paper grain — pure CSS, no image request. */
+  .bg-grain {
+    background-image: radial-gradient(
+        circle at 1px 1px,
+        rgb(29 25 22 / 0.045) 1px,
+        transparent 0
+      ),
+      radial-gradient(circle at 12px 9px, rgb(200 30 60 / 0.03) 1px, transparent 0);
+    background-size: 18px 18px, 26px 26px;
+  }
+
+  .text-gradient-brand {
+    background-image: linear-gradient(
+      100deg,
+      var(--color-chilli-600),
+      var(--color-chilli-500) 38%,
+      var(--color-royal-600)
+    );
+    background-clip: text;
+    color: transparent;
+  }
+
+  .bg-brand-sweep {
+    background-image: linear-gradient(
+      120deg,
+      var(--color-chilli-700),
+      var(--color-chilli-600) 42%,
+      var(--color-royal-700) 100%
+    );
+  }
+
+  /* Skeleton shimmer for suspended/loading media. */
+  .shimmer {
+    background-image: linear-gradient(
+      100deg,
+      transparent 20%,
+      rgb(255 255 255 / 0.55) 40%,
+      transparent 60%
+    );
+    background-size: 200% 100%;
+    animation: var(--animate-shimmer);
+  }
+
+  .scrollbar-none {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Clamp helpers used across product copy. */
+  .line-clamp-2-safe {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Accessibility — honour the OS "reduce motion" setting everywhere.
+   The 3D scene and all scroll reveals check this too, in JS.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
 }
